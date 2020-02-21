@@ -53,8 +53,8 @@ namespace ComparePDF
         private static bool ComparePDFImages(string pdfPath1, string pdfPath2)
         {
             // deletes the old directory first
-            string tempLocation1 = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\pdf1";
-            string tempLocation2 = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\pdf2";
+            string tempLocation1 = "C:\\TEMP\\pdfImages1";
+            string tempLocation2 = "C:\\TEMP\\pdfImages2";
 
             if (Directory.Exists(tempLocation1))
             {
@@ -67,8 +67,8 @@ namespace ComparePDF
             }
 
             // Extracts the images
-            RunPdfToHtml(pdfPath1, "pdf1");
-            RunPdfToHtml(pdfPath2, "pdf2");
+            RunPdfToHtml(pdfPath1, tempLocation1);
+            RunPdfToHtml(pdfPath2, tempLocation2);
 
             // if pages are not the same, return false
             int pageCount1 = Directory.GetFiles(tempLocation1, "*.*", SearchOption.AllDirectories)
@@ -83,6 +83,7 @@ namespace ComparePDF
 
             if (pageCount1 != pageCount2)
             {
+                Console.WriteLine("Number PDF Pages are different");
                 return false;
             }
 
@@ -93,6 +94,7 @@ namespace ComparePDF
                     if (!CompareImages(tempLocation1 + $"\\page{i}.png", tempLocation2 + $"\\page{i}.png") == true)
                     {
                         // there is a difference in the images.
+                        Console.WriteLine("Images are Different");
                         return false;
                     }
                 }
@@ -179,7 +181,7 @@ namespace ComparePDF
 
                 if (exitCode != 0)
                 {
-                    throw new Exception("something went wrong :(");
+                    throw new Exception("something went wrong with image converter :(");
                 }
 
                 pass = true;
