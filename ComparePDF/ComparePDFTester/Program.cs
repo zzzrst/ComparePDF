@@ -14,7 +14,7 @@ namespace ComparePDFTester
             TextInteractor.TextInteractor interactor = new TextInteractor.TextInteractor("\\Test page 1.pdf");
             Console.WriteLine(PDFComparer.ComparePDF(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Test page 1.pdf",
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Test page no pic.pdf",
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Test page 2.pdf",
                 regex));
         }
     }
