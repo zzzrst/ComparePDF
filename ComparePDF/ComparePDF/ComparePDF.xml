@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ComparePDF</name>
+    </assembly>
+    <members>
+        <member name="T:ComparePDF.PDFComparer">
+            <summary>
+            Compares two different PDFs.
+            </summary>
+        </member>
+        <member name="M:ComparePDF.PDFComparer.ComparePDF(System.String,System.String,System.String)">
+            <summary>
+            Compares if two pdfs are the same.
+            </summary>
+            <param name="pdfPath1">Path of the first file.</param>
+            <param name="pdfPath2">Path of the second file.</param>
+            <param name="args">Regex to replace, written as REGEX];[REPLACE.</param>
+            <returns>true if pdfs are the same.</returns>
+        </member>
+        <member name="M:ComparePDF.PDFComparer.Main(System.String[])">
+            <summary>
+            Main program.
+            </summary>
+            <param name="args">arguments that are passed in.</param>
+        </member>
+    </members>
+</doc>
