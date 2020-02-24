@@ -47,7 +47,6 @@ namespace ComparePDF
         /// <param name="args">arguments that are passed in.</param>
         internal static void Main(string[] args)
         {
-
         }
 
         private static bool ComparePDFImages(string pdfPath1, string pdfPath2)
@@ -91,7 +90,7 @@ namespace ComparePDF
             {
                 if (File.Exists(tempLocation1 + $"\\page{i}.png") && File.Exists(tempLocation2 + $"\\page{i}.png"))
                 {
-                    if (!CompareImages(tempLocation1 + $"\\page{i}.png", tempLocation2 + $"\\page{i}.png") == true)
+                    if (!CompareImages(tempLocation1 + $"\\page{i}.png", tempLocation2 + $"\\page{i}.png"))
                     {
                         // there is a difference in the images.
                         Console.WriteLine("Images are Different");
@@ -176,10 +175,14 @@ namespace ComparePDF
                 };
                 p.StartInfo = startInfo;
                 p.Start();
-                p.WaitForExit();
-                int exitCode = p.ExitCode;
+                string line;
+                while ((line = p.StandardOutput.ReadLine()) != null)
+                {
+                }
 
-                if (exitCode != 0)
+                p.WaitForExit();
+
+                if (p.ExitCode != 0)
                 {
                     throw new Exception("something went wrong with image converter :(");
                 }
@@ -205,13 +208,13 @@ namespace ComparePDF
 
         private static string GetImageHash(string imagePath)
         {
-            Image img = Image.FromFile(imagePath);
-
             using (var md5 = MD5.Create())
             {
                 using (var stream = File.OpenRead(imagePath))
                 {
-                    return Convert.ToBase64String(md5.ComputeHash(stream));
+                    string hash = Convert.ToBase64String(md5.ComputeHash(stream));
+                    stream.Close();
+                    return hash;
                 }
             }
         }
