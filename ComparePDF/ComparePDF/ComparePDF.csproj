@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="checkdigit.vbs" />
     <None Remove="converter.bat" />
     <None Remove="help.txt" />
     <None Remove="pdftohtml.exe" />
@@ -22,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="checkdigit.vbs" />
     <Content Include="converter.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
