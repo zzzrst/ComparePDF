@@ -1,5 +1,5 @@
 # ComparePDF
-Compares two pdfs. Uses [TextInteractor](https://github.com/zzzrst/TextInteractor)
+Compares two pdfs. For use in C#.
 ## How to use
 Call the method
 ```c#
@@ -11,3 +11,6 @@ in args, use the format:
 "REGEX];[VALUE"
 ```
 where REGEX is the regular expression to replace with VALUE.
+
+## Dependancies
+ - [TextInteractor](https://github.com/zzzrst/TextInteractor)
