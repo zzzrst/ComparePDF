@@ -1,5 +1,5 @@
 # ComparePDF
-For C# programs.  
+This is a .Net 2.0 Standard Library. 
 This directory contains the source code for the package ComparePDF. This program compares two different PDFs and see if they are identical. There are options to ingore regexs.
 
 ## How to use
