@@ -1,9 +1,9 @@
 name: test and publish
 
 on:
-  #push:
-  #  branches:
-  #    - master
+  push:
+    branches:
+      - master
   repository_dispatch:
     types: [push-event]
 
