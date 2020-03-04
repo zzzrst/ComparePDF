@@ -6,7 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TextInteractor" Version="1.0.0" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TextInteractor" Version="1.2.7367.35367" />
   </ItemGroup>
 
   <ItemGroup>

@@ -20,32 +20,97 @@
 
   <ItemGroup>
     <None Remove="checkdigit.vbs" />
-    <None Remove="converter.bat" />
     <None Remove="help.txt" />
     <None Remove="pdftohtml.exe" />
     <None Remove="pdftotext.exe" />
+    <None Remove="poppler\freetype6.dll" />
+    <None Remove="poppler\jpeg62.dll" />
+    <None Remove="poppler\libcairo-2.dll" />
+    <None Remove="poppler\libexpat-1.dll" />
+    <None Remove="poppler\libfontconfig-1.dll" />
+    <None Remove="poppler\libgcc_s_dw2-1.dll" />
+    <None Remove="poppler\libpixman-1-0.dll" />
+    <None Remove="poppler\libpng16-16.dll" />
+    <None Remove="poppler\libpoppler-79.dll" />
+    <None Remove="poppler\libpoppler-cpp-0.dll" />
+    <None Remove="poppler\libstdc++-6.dll" />
+    <None Remove="poppler\libtiff3.dll" />
+    <None Remove="poppler\pdfdetach.exe" />
+    <None Remove="poppler\pdfimages.exe" />
+    <None Remove="poppler\README" />
+    <None Remove="poppler\README-XPDF" />
+    <None Remove="poppler\zlib1.dll" />
+    <None Remove="xpdf\pdftotext.exe" />
+    <None Remove="xpdf\README" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="checkdigit.vbs" />
-    <Content Include="converter.bat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="poppler\freetype6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="help.txt" />
-    <Content Include="pdftohtml.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="poppler\jpeg62.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="pdftotext.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="poppler\libcairo-2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\libexpat-1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\libfontconfig-1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\libgcc_s_dw2-1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\libpixman-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\libpng16-16.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\libpoppler-79.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\libpoppler-cpp-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\libstdc++-6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\libtiff3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\pdfdetach.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\pdfimages.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\README">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\README-XPDF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="poppler\zlib1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="xpdf\pdftotext.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="xpdf\README">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="TextInteractor" Version="1.0.0" />
+    <PackageReference Include="TextInteractor" Version="1.2.7367.35367" />
   </ItemGroup>
 
   <ItemGroup>

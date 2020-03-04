@@ -7,9 +7,11 @@ namespace ComparePDF
     using System;
     using System.Diagnostics;
     using System.IO;
+    using System.IO.Compression;
     using System.Linq;
     using System.Reflection;
     using System.Security.Cryptography;
+    using Microsoft.Extensions.Logging;
     using TextInteractor;
 
     /// <summary>
@@ -18,204 +20,179 @@ namespace ComparePDF
     public class PDFComparer
     {
         /// <summary>
-        /// Compares if two pdfs are the same.
+        /// Initializes a new instance of the <see cref="PDFComparer"/> class.
         /// </summary>
-        /// <param name="pdfPath1">Path of the first file.</param>
-        /// <param name="pdfPath2">Path of the second file.</param>
-        /// <param name="args">Regex to replace, written as REGEX];[REPLACE.</param>
-        /// <returns>true if pdfs are the same.</returns>
-        public static bool ComparePDF(string pdfPath1, string pdfPath2, string args)
+        /// <param name="pdfFilePath1">Sets the file path to the first PDF.</param>
+        /// <param name="pdfFilePath2">Sets the file path to the second PDF.</param>
+        public PDFComparer(string pdfFilePath1, string pdfFilePath2)
+            : this(pdfFilePath1, pdfFilePath2, logger: null)
         {
-            // return false if the text is not the same
-            if (!ComparePDFText(pdfPath1, pdfPath2, $@"{args}"))
-            {
-                return false;
-            }
-
-            if (!ComparePDFImages(pdfPath1, pdfPath2))
-            {
-                return false;
-            }
-
-            return true;
         }
 
         /// <summary>
-        /// Main program.
+        /// Initializes a new instance of the <see cref="PDFComparer"/> class.
         /// </summary>
-        /// <param name="args">arguments that are passed in.</param>
-        internal static void Main(string[] args)
+        /// <param name="pdfFilePath1">Sets the file path to the first PDF.</param>
+        /// <param name="pdfFilePath2">Sets the file path to the second PDF.</param>
+        /// <param name="logger">The logger to use throughout the class.</param>
+        public PDFComparer(string pdfFilePath1, string pdfFilePath2, ILogger logger)
         {
+            this.PDFFilePath1 = pdfFilePath1;
+            this.PDFFilePath2 = pdfFilePath2;
+            this.Logger = logger;
         }
 
-        private static bool ComparePDFImages(string pdfPath1, string pdfPath2)
+        /// <summary>
+        /// Gets or sets the HashAlgorithmName to be used to compare extracted files.
+        /// Default is set to MD5 hash.
+        /// </summary>
+        public HashAlgorithmName Hash { get; set; } = HashAlgorithmName.MD5;
+
+        /// <summary>
+        /// Gets or sets file path to the first PDF.
+        /// </summary>
+        private string PDFFilePath1 { get; set; }
+
+        /// <summary>
+        /// Gets or sets file path to the second PDF.
+        /// </summary>
+        private string PDFFilePath2 { get; set; }
+
+        /// <summary>
+        /// Gets or sets the logger to be used throughout the class.
+        /// </summary>
+        private ILogger Logger { get; set; }
+
+        /// <summary>
+        /// Compares two PDFS by the set hash algorithm name.
+        /// </summary>
+        /// <returns>True if the hash are the same.</returns>
+        public bool ComparePDFByHash()
         {
-            // deletes the old directory first
-            string tempLocation1 = "C:\\TEMP\\pdfImages1";
-            string tempLocation2 = "C:\\TEMP\\pdfImages2";
-
-            if (Directory.Exists(tempLocation1))
-            {
-                Directory.Delete(tempLocation1, true);
-            }
-
-            if (Directory.Exists(tempLocation2))
-            {
-                Directory.Delete(tempLocation2, true);
-            }
-
-            // Extracts the images
-            RunPdfToHtml(pdfPath1, tempLocation1);
-            RunPdfToHtml(pdfPath2, tempLocation2);
-
-            // if pages are not the same, return false
-            int pageCount1 = Directory.GetFiles(tempLocation1, "*.*", SearchOption.AllDirectories)
-                 .Where(file => new string[] { ".jpg", ".gif", ".png" }
-                 .Contains(Path.GetExtension(file)))
-                 .ToList().Count;
-
-            int pageCount2 = Directory.GetFiles(tempLocation2, "*.*", SearchOption.AllDirectories)
-                 .Where(file => new string[] { ".jpg", ".gif", ".png" }
-                 .Contains(Path.GetExtension(file)))
-                 .ToList().Count;
-
-            if (pageCount1 != pageCount2)
-            {
-                Console.WriteLine("Number PDF Pages are different");
-                return false;
-            }
-
-            for (int i = 1; i <= pageCount1; i++)
-            {
-                if (File.Exists(tempLocation1 + $"\\page{i}.png") && File.Exists(tempLocation2 + $"\\page{i}.png"))
-                {
-                    if (!CompareImages(tempLocation1 + $"\\page{i}.png", tempLocation2 + $"\\page{i}.png"))
-                    {
-                        // there is a difference in the images.
-                        Console.WriteLine("Images are Different");
-                        return false;
-                    }
-                }
-                else
-                {
-                    // one of the files do not exists means one of the images is not in one of the pdfs.
-                    return false;
-                }
-            }
-
-            return true;
+            return FileHashComparison.CompareFiles(this.PDFFilePath1, this.PDFFilePath2, this.Hash);
         }
 
-        private static bool ComparePDFText(string pdfPath1, string pdfPath2, string args)
+        ///// <summary>
+        ///// We extract the text from the PDFs provided. We compare the text based on the arguements provided. We ignore whitespaces by default.
+        ///// </summary>
+        ///// <param name="resultFilePath">Name of the file for PDF text comparison.</param>
+        ///// <param name="regex">Regex to be replaced.</param>
+        ///// <param name="replacement">Replacement value for the regex.</param>
+        ///// <param name="caseInsensitive">Toggle when comparing extracted text. Default to be false.</param>
+        ///// <param name="ignoreWhitespace">Toggle when comparing extracted text. Default to be true.</param>
+        ///// <returns><code>true</code> if the PDF texts are the same. </returns>
+        //public bool ComparePDFText(string resultFilePath, string regex = default, string replacement = default, bool caseInsensitive = false, bool ignoreWhitespace = true)
+        //{
+        //    if ((regex == default && replacement != default) || (regex != default && replacement == default))
+        //    {
+        //        throw new ArgumentException("Both regex and replacement have to be filled out at the same time.");
+        //    }
+
+        //    return this.ComparePDFText(resultFilePath, (regex, replacement), caseInsensitive, ignoreWhitespace);
+        //}
+
+        /// <summary>
+        /// We extract the text from the PDFs provided. We compare the text based on the arguements provided. We ignore whitespaces by default.
+        /// </summary>
+        /// <param name="resultFilePath">Name of the file for PDF text comparison.</param>
+        /// <param name="regexReplacement">(REGEX, REPLACEMENT) -> A 2-Tuple string for the regex and replacement.</param>
+        /// <param name="caseInsensitive">Toggle when comparing extracted text. Default to be false.</param>
+        /// <param name="ignoreWhitespace">Toggle when comparing extracted text. Default to be true.</param>
+        /// <returns><code>true</code> if the PDF texts are the same. </returns>
+        public bool ComparePDFText(string resultFilePath, (string regex, string replacement) regexReplacement = default, bool caseInsensitive = false, bool ignoreWhitespace = true)
         {
-            try
-            {
-                Process p = new Process();
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    FileName = "cmd.exe",
-                    Arguments = $"/C exit | \"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\converter.bat\" \"{pdfPath1}\" \"{pdfPath2}\"",
-                };
-                p.StartInfo = startInfo;
-                p.Start();
-                string line;
-                while ((line = p.StandardOutput.ReadLine()) != null)
-                {
-                }
+            // Convert both pdfs into text
+            string pdf1FileName = Path.GetTempFileName();
+            string pdf2FileName = Path.GetTempFileName();
 
-                p.WaitForExit();
-                if (p.ExitCode != 0)
-                {
-                    return false;
-                }
-            }
-            catch (Exception)
+            PDFToolWrapper.RunPDFToText(this.PDFFilePath1, pdf1FileName, this.Logger);
+            PDFToolWrapper.RunPDFToText(this.PDFFilePath2, pdf2FileName, this.Logger);
+
+            TextFile pdfText1 = new TextInteractor(pdf1FileName, this.Logger);
+            TextFile pdfText2 = new TextInteractor(pdf2FileName, this.Logger);
+
+            if (regexReplacement != default)
             {
-                return false;
+                pdfText1.ReplaceOccurances(toReplace: regexReplacement.regex, replaceWith: regexReplacement.replacement);
+                pdfText2.ReplaceOccurances(toReplace: regexReplacement.regex, replaceWith: regexReplacement.replacement);
             }
 
-            string expectedFilePath = "C:\\TEMP\\expected.txt";
-            string actualFilePath = "C:\\TEMP\\actual.txt";
-
-            bool result = false;
-
-            TextInteractor fileExpected = new TextInteractor(expectedFilePath);
-            TextInteractor fileActual = new TextInteractor(actualFilePath);
-
-            if (fileExpected.Open() & fileActual.Open())
-            {
-                // remove the regex substrings.
-                fileExpected.Modify(3, args);
-                fileActual.Modify(3, args);
-
-                result = fileExpected.Compare(fileActual, ignoreWhitespace: true);
-
-                fileExpected.Close();
-                fileActual.Close();
-            }
-
-            return result;
+            return pdfText1.Compare(pdfText2, resultFilePath, ignoreWhitespace, caseInsensitive);
         }
 
-        private static bool RunPdfToHtml(string pdfPath, string htmlname)
+        /// <summary>
+        /// Compares the embedded files inside the PDF through extraction and hashing.
+        /// </summary>
+        /// <param name="resultZipFile">Zip file that contains the extracted files.</param>
+        /// <returns><c>True</c> if the embedded files hash matches.</returns>
+        public bool ComparePDFEmbeddedFiles(string resultZipFile)
         {
-            bool pass = false;
-            try
-            {
-                Process p = new Process();
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    FileName = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\pdftohtml.exe",
-                    Arguments = $" -q \"{pdfPath}\" \"{htmlname}\"",
-                };
-                p.StartInfo = startInfo;
-                p.Start();
-                string line;
-                while ((line = p.StandardOutput.ReadLine()) != null)
-                {
-                }
+            // We create a folder for PDF file 1, and PDF file 2
+            string tempFolder = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            string pdfFile1Folder = Path.Combine(tempFolder, Path.GetFileNameWithoutExtension(this.PDFFilePath1));
+            string pdfFile2Folder = Path.Combine(tempFolder, Path.GetFileNameWithoutExtension(this.PDFFilePath2));
+            Directory.CreateDirectory(pdfFile1Folder);
+            Directory.CreateDirectory(pdfFile2Folder);
 
-                p.WaitForExit();
+            // Extract Images
+            PDFToolWrapper.RunPDFDetach(this.PDFFilePath1, pdfFile1Folder, this.Logger);
+            PDFToolWrapper.RunPDFDetach(this.PDFFilePath2, pdfFile2Folder, this.Logger);
+            ZipFile.CreateFromDirectory(tempFolder, resultZipFile);
 
-                if (p.ExitCode != 0)
-                {
-                    throw new Exception("something went wrong with image converter :(");
-                }
-
-                pass = true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            return pass;
+            return this.CompareDirectory(pdfFile1Folder, pdfFile2Folder);
         }
 
-        private static bool CompareImages(string imagePath1, string imagePath2)
+        /// <summary>
+        /// Compares the images inside the PDF through extraction and hashing.
+        /// </summary>
+        /// <param name="resultZipFile">The zip file representing the images extracted.</param>
+        /// <returns><c>True</c> if the embedded files hash matches.</returns>
+        public bool ComparePDFImages(string resultZipFile)
         {
-            string hash1, hash2;
-            hash1 = GetImageHash(imagePath1);
-            hash2 = GetImageHash(imagePath2);
+            // We create a folder for PDF file 1, and PDF file 2
+            string tempFolder = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            string pdfFile1Folder = Path.Combine(tempFolder, Path.GetFileNameWithoutExtension(this.PDFFilePath1));
+            string pdfFile2Folder = Path.Combine(tempFolder, Path.GetFileNameWithoutExtension(this.PDFFilePath2));
+            Directory.CreateDirectory(pdfFile1Folder);
+            Directory.CreateDirectory(pdfFile2Folder);
 
-            return hash1.Equals(hash2);
+            // Extract Images
+            PDFToolWrapper.RunPDFtoImage(this.PDFFilePath1, pdfFile1Folder, this.Logger);
+            PDFToolWrapper.RunPDFtoImage(this.PDFFilePath2, pdfFile2Folder, this.Logger);
+            ZipFile.CreateFromDirectory(tempFolder, resultZipFile);
+
+            return this.CompareDirectory(pdfFile1Folder, pdfFile2Folder);
         }
 
-        private static string GetImageHash(string imagePath)
+        private bool CompareDirectory(string directory1, string directory2)
         {
-            using (var md5 = MD5.Create())
+            // We check if the image produced from each is the same.
+            string[] directory1FileList = Directory.GetFiles(directory1);
+            string[] directroy2FileList = Directory.GetFiles(directory2);
+
+            bool isFileCountSame = directory1FileList.Length == directroy2FileList.Length;
+            if (!isFileCountSame)
             {
-                using (var stream = File.OpenRead(imagePath))
+                this.Logger.LogError("The number of files are not the same.");
+                return isFileCountSame;
+            }
+
+            bool areSameFiles = true;
+            foreach (string fileFullPath in directory1FileList)
+            {
+                string fileName = Path.GetFileName(fileFullPath);
+                string directory1FilePath = Path.Combine(directory1, fileName);
+                string directroy2FilePath = Path.Combine(directory2, fileName);
+                bool isSameFile = FileHashComparison.CompareFiles(directory1FilePath, directroy2FilePath, this.Hash);
+
+                if (!isSameFile)
                 {
-                    string hash = Convert.ToBase64String(md5.ComputeHash(stream));
-                    stream.Close();
-                    return hash;
+                    this.Logger.LogError($"{fileName} were not the same for both PDFs");
+                    areSameFiles &= isSameFile;
                 }
             }
+
+            return areSameFiles;
         }
     }
 }
