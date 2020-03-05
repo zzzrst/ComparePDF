@@ -1,0 +1,102 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: ComparePDF
+  name: ComparePDF
+  href: api/ComparePDF.html
+  commentId: N:ComparePDF
+  fullName: ComparePDF
+  nameWithType: ComparePDF
+- uid: ComparePDF.PDFComparer
+  name: PDFComparer
+  href: api/ComparePDF.PDFComparer.html
+  commentId: T:ComparePDF.PDFComparer
+  fullName: ComparePDF.PDFComparer
+  nameWithType: PDFComparer
+- uid: ComparePDF.PDFComparer.#ctor(System.String,System.String)
+  name: PDFComparer(String, String)
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer__ctor_System_String_System_String_
+  commentId: M:ComparePDF.PDFComparer.#ctor(System.String,System.String)
+  fullName: ComparePDF.PDFComparer.PDFComparer(System.String, System.String)
+  nameWithType: PDFComparer.PDFComparer(String, String)
+- uid: ComparePDF.PDFComparer.#ctor(System.String,System.String,Microsoft.Extensions.Logging.ILogger)
+  name: PDFComparer(String, String, ILogger)
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer__ctor_System_String_System_String_Microsoft_Extensions_Logging_ILogger_
+  commentId: M:ComparePDF.PDFComparer.#ctor(System.String,System.String,Microsoft.Extensions.Logging.ILogger)
+  fullName: ComparePDF.PDFComparer.PDFComparer(System.String, System.String, Microsoft.Extensions.Logging.ILogger)
+  nameWithType: PDFComparer.PDFComparer(String, String, ILogger)
+- uid: ComparePDF.PDFComparer.#ctor*
+  name: PDFComparer
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer__ctor_
+  commentId: Overload:ComparePDF.PDFComparer.#ctor
+  isSpec: "True"
+  fullName: ComparePDF.PDFComparer.PDFComparer
+  nameWithType: PDFComparer.PDFComparer
+- uid: ComparePDF.PDFComparer.ComparePDFByHash
+  name: ComparePDFByHash()
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer_ComparePDFByHash
+  commentId: M:ComparePDF.PDFComparer.ComparePDFByHash
+  fullName: ComparePDF.PDFComparer.ComparePDFByHash()
+  nameWithType: PDFComparer.ComparePDFByHash()
+- uid: ComparePDF.PDFComparer.ComparePDFByHash*
+  name: ComparePDFByHash
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer_ComparePDFByHash_
+  commentId: Overload:ComparePDF.PDFComparer.ComparePDFByHash
+  isSpec: "True"
+  fullName: ComparePDF.PDFComparer.ComparePDFByHash
+  nameWithType: PDFComparer.ComparePDFByHash
+- uid: ComparePDF.PDFComparer.ComparePDFEmbeddedFiles(System.String)
+  name: ComparePDFEmbeddedFiles(String)
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer_ComparePDFEmbeddedFiles_System_String_
+  commentId: M:ComparePDF.PDFComparer.ComparePDFEmbeddedFiles(System.String)
+  fullName: ComparePDF.PDFComparer.ComparePDFEmbeddedFiles(System.String)
+  nameWithType: PDFComparer.ComparePDFEmbeddedFiles(String)
+- uid: ComparePDF.PDFComparer.ComparePDFEmbeddedFiles*
+  name: ComparePDFEmbeddedFiles
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer_ComparePDFEmbeddedFiles_
+  commentId: Overload:ComparePDF.PDFComparer.ComparePDFEmbeddedFiles
+  isSpec: "True"
+  fullName: ComparePDF.PDFComparer.ComparePDFEmbeddedFiles
+  nameWithType: PDFComparer.ComparePDFEmbeddedFiles
+- uid: ComparePDF.PDFComparer.ComparePDFImages(System.String)
+  name: ComparePDFImages(String)
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer_ComparePDFImages_System_String_
+  commentId: M:ComparePDF.PDFComparer.ComparePDFImages(System.String)
+  fullName: ComparePDF.PDFComparer.ComparePDFImages(System.String)
+  nameWithType: PDFComparer.ComparePDFImages(String)
+- uid: ComparePDF.PDFComparer.ComparePDFImages*
+  name: ComparePDFImages
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer_ComparePDFImages_
+  commentId: Overload:ComparePDF.PDFComparer.ComparePDFImages
+  isSpec: "True"
+  fullName: ComparePDF.PDFComparer.ComparePDFImages
+  nameWithType: PDFComparer.ComparePDFImages
+- uid: ComparePDF.PDFComparer.ComparePDFText(System.String,System.ValueTuple{System.String,System.String},System.Boolean,System.Boolean)
+  name: ComparePDFText(String, (String regex, String replacement), Boolean, Boolean)
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer_ComparePDFText_System_String_System_ValueTuple_System_String_System_String__System_Boolean_System_Boolean_
+  commentId: M:ComparePDF.PDFComparer.ComparePDFText(System.String,System.ValueTuple{System.String,System.String},System.Boolean,System.Boolean)
+  name.vb: ComparePDFText(String, (regex As String, replacement As String), Boolean, Boolean)
+  fullName: ComparePDF.PDFComparer.ComparePDFText(System.String, System.ValueTuple<System.String, System.String>, System.Boolean, System.Boolean)
+  fullName.vb: ComparePDF.PDFComparer.ComparePDFText(System.String, System.ValueTuple(Of System.String, System.String), System.Boolean, System.Boolean)
+  nameWithType: PDFComparer.ComparePDFText(String, (String regex, String replacement), Boolean, Boolean)
+  nameWithType.vb: PDFComparer.ComparePDFText(String, (regex As String, replacement As String), Boolean, Boolean)
+- uid: ComparePDF.PDFComparer.ComparePDFText*
+  name: ComparePDFText
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer_ComparePDFText_
+  commentId: Overload:ComparePDF.PDFComparer.ComparePDFText
+  isSpec: "True"
+  fullName: ComparePDF.PDFComparer.ComparePDFText
+  nameWithType: PDFComparer.ComparePDFText
+- uid: ComparePDF.PDFComparer.Hash
+  name: Hash
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer_Hash
+  commentId: P:ComparePDF.PDFComparer.Hash
+  fullName: ComparePDF.PDFComparer.Hash
+  nameWithType: PDFComparer.Hash
+- uid: ComparePDF.PDFComparer.Hash*
+  name: Hash
+  href: api/ComparePDF.PDFComparer.html#ComparePDF_PDFComparer_Hash_
+  commentId: Overload:ComparePDF.PDFComparer.Hash
+  isSpec: "True"
+  fullName: ComparePDF.PDFComparer.Hash
+  nameWithType: PDFComparer.Hash

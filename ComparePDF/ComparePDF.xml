@@ -4,25 +4,136 @@
         <name>ComparePDF</name>
     </assembly>
     <members>
+        <member name="T:ComparePDF.FileHashComparison">
+            <summary>
+            Class to compare files through hashing.
+            </summary>
+        </member>
+        <member name="M:ComparePDF.FileHashComparison.CompareFiles(System.String,System.String,System.Security.Cryptography.HashAlgorithmName)">
+            <summary>
+            Compares two files by hashing both files using the provided HashAlgorithm.
+            </summary>
+            <param name="filePath1"> File path to the first file to check.</param>
+            <param name="filePath2"> File path to the second file to check.</param>
+            <param name="algorithmName">The hashing algorithm name to use.</param>
+            <returns><code>true</code> if both files return the same hash.</returns>
+        </member>
+        <member name="M:ComparePDF.FileHashComparison.GetFileHash(System.String,System.Security.Cryptography.HashAlgorithmName)">
+            <summary>
+            Gets the file hash based on the provided hashing algorithm name.
+            </summary>
+            <param name="filePath"> FIle path to the file to hash.</param>
+            <param name="algorithmName">The hashing algorithm name to use.</param>
+            <returns>Base64 encoded string of the hash.</returns>
+        </member>
         <member name="T:ComparePDF.PDFComparer">
             <summary>
             Compares two different PDFs.
             </summary>
         </member>
-        <member name="M:ComparePDF.PDFComparer.ComparePDF(System.String,System.String,System.String)">
+        <member name="M:ComparePDF.PDFComparer.#ctor(System.String,System.String)">
             <summary>
-            Compares if two pdfs are the same.
+            Initializes a new instance of the <see cref="T:ComparePDF.PDFComparer"/> class.
             </summary>
-            <param name="pdfPath1">Path of the first file.</param>
-            <param name="pdfPath2">Path of the second file.</param>
-            <param name="args">Regex to replace, written as REGEX];[REPLACE.</param>
-            <returns>true if pdfs are the same.</returns>
+            <param name="pdfFilePath1">Sets the file path to the first PDF.</param>
+            <param name="pdfFilePath2">Sets the file path to the second PDF.</param>
         </member>
-        <member name="M:ComparePDF.PDFComparer.Main(System.String[])">
+        <member name="M:ComparePDF.PDFComparer.#ctor(System.String,System.String,Microsoft.Extensions.Logging.ILogger)">
             <summary>
-            Main program.
+            Initializes a new instance of the <see cref="T:ComparePDF.PDFComparer"/> class.
             </summary>
-            <param name="args">arguments that are passed in.</param>
+            <param name="pdfFilePath1">Sets the file path to the first PDF.</param>
+            <param name="pdfFilePath2">Sets the file path to the second PDF.</param>
+            <param name="logger">The logger to use throughout the class.</param>
+        </member>
+        <member name="P:ComparePDF.PDFComparer.Hash">
+            <summary>
+            Gets or sets the HashAlgorithmName to be used to compare extracted files.
+            Default is set to MD5 hash.
+            </summary>
+        </member>
+        <member name="P:ComparePDF.PDFComparer.PDFFilePath1">
+            <summary>
+            Gets or sets file path to the first PDF.
+            </summary>
+        </member>
+        <member name="P:ComparePDF.PDFComparer.PDFFilePath2">
+            <summary>
+            Gets or sets file path to the second PDF.
+            </summary>
+        </member>
+        <member name="P:ComparePDF.PDFComparer.Logger">
+            <summary>
+            Gets or sets the logger to be used throughout the class.
+            </summary>
+        </member>
+        <member name="M:ComparePDF.PDFComparer.ComparePDFByHash">
+            <summary>
+            Compares two PDFS by the set hash algorithm name.
+            </summary>
+            <returns>True if the hash are the same.</returns>
+        </member>
+        <member name="M:ComparePDF.PDFComparer.ComparePDFText(System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            We extract the text from the PDFs provided. We compare the text based on the arguements provided. We ignore whitespaces by default.
+            </summary>
+            <param name="resultFilePath">Name of the file for PDF text comparison.</param>
+            <param name="regex">Regex to be replaced.</param>
+            <param name="replacement">Replacement value for the regex.</param>
+            <param name="caseInsensitive">Toggle when comparing extracted text. Default to be false.</param>
+            <param name="ignoreWhitespace">Toggle when comparing extracted text. Default to be true.</param>
+            <returns><code>true</code> if the PDF texts are the same. </returns>
+        </member>
+        <member name="M:ComparePDF.PDFComparer.ComparePDFEmbeddedFiles(System.String)">
+            <summary>
+            Compares the embedded files inside the PDF through extraction and hashing.
+            </summary>
+            <param name="resultZipFile">Zip file that contains the extracted files.</param>
+            <returns><c>True</c> if the embedded files hash matches.</returns>
+        </member>
+        <member name="M:ComparePDF.PDFComparer.ComparePDFImages(System.String)">
+            <summary>
+            Compares the images inside the PDF through extraction and hashing.
+            </summary>
+            <param name="resultZipFile">The zip file representing the images extracted.</param>
+            <returns><c>True</c> if the embedded files hash matches.</returns>
+        </member>
+        <member name="T:ComparePDF.PDFToolWrapper">
+            <summary>
+            Class to represent the wrappers for all the PDFTools.
+            </summary>
+        </member>
+        <member name="M:ComparePDF.PDFToolWrapper.RunPDFToText(System.String,System.String,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Runs PDF to text with the provided arguments of -nopgbrk and -table.
+            </summary>
+            <param name="pdfPath">Path of the pdf file to convert to text.</param>
+            <param name="resultFileName">Name of the text file.</param>
+            <param name="logger">Logger to be used.</param>
+        </member>
+        <member name="M:ComparePDF.PDFToolWrapper.RunPDFtoImage(System.String,System.String,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Runs PDF to image with the provided arguments of pdfPath and resultFolder.
+            </summary>
+            <param name="pdfPath">Path of the pdf file to convert to text.</param>
+            <param name="resultFolder">Folder to place images.</param>
+            <param name="logger">Logger to be used.</param>
+        </member>
+        <member name="M:ComparePDF.PDFToolWrapper.RunPDFDetach(System.String,System.String,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Runs PDF to image with the provided arguments of pdfPath and resultFolder.
+            </summary>
+            <param name="pdfPath">Path of the pdf file to convert to text.</param>
+            <param name="resultFolder">Folder to place images.</param>
+            <param name="logger">Logger to be used.</param>
+        </member>
+        <member name="M:ComparePDF.PDFToolWrapper.RunPDFToolWrapper(System.String,System.String,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Wrapper for running the different PDFTools included.
+            </summary>
+            <param name="pdfToolPath">The path to the PDFTool.</param>
+            <param name="arguments">The arguements to be passed to the PDFTool.</param>
+            <param name="logger">The logger used for the standard output and error from the tool.</param>
         </member>
     </members>
 </doc>
