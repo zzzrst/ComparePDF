@@ -6,7 +6,7 @@ This directory contains the source code for the package ComparePDF. This program
 ```c#
 public class Compare()
 {
-    using ComparePDF;
+    import ComparePDF;
 
     public static void Main(string[] args)
     {
