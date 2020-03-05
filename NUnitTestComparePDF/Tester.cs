@@ -23,8 +23,16 @@ namespace ComparePDFTester
         public void TestIgnoreRegex()
         {
             PDFComparer pDFComparer = new PDFComparer("Test page 1.pdf", "Test page 2.pdf", new ConcreteLogger());
-            Assert.IsTrue(pDFComparer.ComparePDFText(textResultPath, ("[a-zA-Z0-9]","")), "Text In files are the same with the given regex");
+            Assert.IsTrue(pDFComparer.ComparePDFText(textResultPath, "[a-zA-Z0-9]", ""), "Text In files are the same with the given regex");
             Assert.IsTrue(pDFComparer.ComparePDFImages(imageResultPath), "Images in file are the same");
+        }
+
+        [Test]
+        public void ThrowRegexException()
+        {
+            PDFComparer pDFComparer = new PDFComparer("Test page 1.pdf", "Test page 2.pdf", new ConcreteLogger());
+            Assert.Throws<ArgumentException>(
+                delegate { pDFComparer.ComparePDFText(textResultPath, "[a-zA-Z0-9]"); }, "Argument Exception should be thrown");
         }
 
         [Test]

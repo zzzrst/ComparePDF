@@ -73,12 +73,13 @@
             </summary>
             <returns>True if the hash are the same.</returns>
         </member>
-        <member name="M:ComparePDF.PDFComparer.ComparePDFText(System.String,System.ValueTuple{System.String,System.String},System.Boolean,System.Boolean)">
+        <member name="M:ComparePDF.PDFComparer.ComparePDFText(System.String,System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
             We extract the text from the PDFs provided. We compare the text based on the arguements provided. We ignore whitespaces by default.
             </summary>
             <param name="resultFilePath">Name of the file for PDF text comparison.</param>
-            <param name="regexReplacement">(REGEX, REPLACEMENT) -> A 2-Tuple string for the regex and replacement.</param>
+            <param name="regex">Regex to be replaced.</param>
+            <param name="replacement">Replacement value for the regex.</param>
             <param name="caseInsensitive">Toggle when comparing extracted text. Default to be false.</param>
             <param name="ignoreWhitespace">Toggle when comparing extracted text. Default to be true.</param>
             <returns><code>true</code> if the PDF texts are the same. </returns>

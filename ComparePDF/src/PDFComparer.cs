@@ -82,36 +82,22 @@ namespace ComparePDF
             return FileHashComparison.CompareFiles(this.PDFFilePath1, this.PDFFilePath2, this.Hash);
         }
 
-        ///// <summary>
-        ///// We extract the text from the PDFs provided. We compare the text based on the arguements provided. We ignore whitespaces by default.
-        ///// </summary>
-        ///// <param name="resultFilePath">Name of the file for PDF text comparison.</param>
-        ///// <param name="regex">Regex to be replaced.</param>
-        ///// <param name="replacement">Replacement value for the regex.</param>
-        ///// <param name="caseInsensitive">Toggle when comparing extracted text. Default to be false.</param>
-        ///// <param name="ignoreWhitespace">Toggle when comparing extracted text. Default to be true.</param>
-        ///// <returns><code>true</code> if the PDF texts are the same. </returns>
-        //public bool ComparePDFText(string resultFilePath, string regex = default, string replacement = default, bool caseInsensitive = false, bool ignoreWhitespace = true)
-        //{
-        //    if ((regex == default && replacement != default) || (regex != default && replacement == default))
-        //    {
-        //        throw new ArgumentException("Both regex and replacement have to be filled out at the same time.");
-        //    }
-
-        //    return this.ComparePDFText(resultFilePath, (regex, replacement), caseInsensitive, ignoreWhitespace);
-        //}
-
         /// <summary>
         /// We extract the text from the PDFs provided. We compare the text based on the arguements provided. We ignore whitespaces by default.
         /// </summary>
         /// <param name="resultFilePath">Name of the file for PDF text comparison.</param>
-        /// <param name="regexReplacement">(REGEX, REPLACEMENT) -> A 2-Tuple string for the regex and replacement.</param>
+        /// <param name="regex">Regex to be replaced.</param>
+        /// <param name="replacement">Replacement value for the regex.</param>
         /// <param name="caseInsensitive">Toggle when comparing extracted text. Default to be false.</param>
         /// <param name="ignoreWhitespace">Toggle when comparing extracted text. Default to be true.</param>
         /// <returns><code>true</code> if the PDF texts are the same. </returns>
-        public bool ComparePDFText(string resultFilePath, (string regex, string replacement) regexReplacement = default, bool caseInsensitive = false, bool ignoreWhitespace = true)
+        public bool ComparePDFText(string resultFilePath, string regex = null, string replacement = null, bool caseInsensitive = false, bool ignoreWhitespace = true)
         {
-            // Convert both pdfs into text
+            if ((regex == null && replacement != null) || (regex != null && replacement == null))
+            {
+                throw new ArgumentException("Both regex and replacement have to be filled out at the same time.");
+            }
+
             string pdf1FileName = Path.ChangeExtension(Path.GetTempFileName(), ".txt");
             string pdf2FileName = Path.ChangeExtension(Path.GetTempFileName(), ".txt");
 
@@ -121,14 +107,43 @@ namespace ComparePDF
             TextFile pdfText1 = new TextInteractor(pdf1FileName, this.Logger);
             TextFile pdfText2 = new TextInteractor(pdf2FileName, this.Logger);
 
-            if (regexReplacement != default)
+            if (regex != null && replacement != null)
             {
-                pdfText1.ReplaceOccurances(toReplace: regexReplacement.regex, replaceWith: regexReplacement.replacement);
-                pdfText2.ReplaceOccurances(toReplace: regexReplacement.regex, replaceWith: regexReplacement.replacement);
+                pdfText1.ReplaceOccurances(regex, replacement);
+                pdfText2.ReplaceOccurances(regex, replacement);
             }
 
             return pdfText1.Compare(pdfText2, resultFilePath, ignoreWhitespace, caseInsensitive);
         }
+
+        /// <summary>
+        /// We extract the text from the PDFs provided. We compare the text based on the arguements provided. We ignore whitespaces by default.
+        /// </summary>
+        /// <param name="resultFilePath">Name of the file for PDF text comparison.</param>
+        /// <param name="regexReplacement">(REGEX, REPLACEMENT) -> A 2-Tuple string for the regex and replacement.</param>
+        /// <param name="caseInsensitive">Toggle when comparing extracted text. Default to be false.</param>
+        /// <param name="ignoreWhitespace">Toggle when comparing extracted text. Default to be true.</param>
+        /// <returns><code>true</code> if the PDF texts are the same. </returns>
+        //public bool ComparePDFText(string resultFilePath, (string regex, string replacement) regexReplacement = default, bool caseInsensitive = false, bool ignoreWhitespace = true)
+        //{
+        //    // Convert both pdfs into text
+        //    string pdf1FileName = Path.ChangeExtension(Path.GetTempFileName(), ".txt");
+        //    string pdf2FileName = Path.ChangeExtension(Path.GetTempFileName(), ".txt");
+
+        //    PDFToolWrapper.RunPDFToText(this.PDFFilePath1, pdf1FileName, this.Logger);
+        //    PDFToolWrapper.RunPDFToText(this.PDFFilePath2, pdf2FileName, this.Logger);
+
+        //    TextFile pdfText1 = new TextInteractor(pdf1FileName, this.Logger);
+        //    TextFile pdfText2 = new TextInteractor(pdf2FileName, this.Logger);
+
+        //    if (regexReplacement != default)
+        //    {
+        //        pdfText1.ReplaceOccurances(toReplace: regexReplacement.regex, replaceWith: regexReplacement.replacement);
+        //        pdfText2.ReplaceOccurances(toReplace: regexReplacement.regex, replaceWith: regexReplacement.replacement);
+        //    }
+
+        //    return pdfText1.Compare(pdfText2, resultFilePath, ignoreWhitespace, caseInsensitive);
+        //}
 
         /// <summary>
         /// Compares the embedded files inside the PDF through extraction and hashing.
