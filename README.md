@@ -29,5 +29,5 @@ It will return true if the pdfs are the same, false otherwise.
  - [TextInteractor](https://github.com/zzzrst/TextInteractor)
  ## Other Notes
  Version number are labed as MAJOR.MINOR.dailyBuild.buildTime  
- Major changes are when new classes are added, except helper classes, or when a large change is made to the code such as a large functionality change.
- Minor changes are when methods are added/removed or a helper class is added.
+Major changes are when new classes are added, except helper classes, or when a large change is made to the code such as a large functionality change.  
+Minor changes are when methods are added/removed or a helper class is added.
