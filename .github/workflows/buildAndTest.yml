@@ -8,7 +8,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -22,7 +22,7 @@ jobs:
   test:
     needs: build
     
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:  
     - uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
   automerge:
     needs: [build,test]
     
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: automerge
         uses: "pascalgn/automerge-action@ccae530ae13b6af67a7a2009c266fe925844e658"
@@ -47,7 +47,7 @@ jobs:
   trigger_workflow:
     needs: [automerge]
     
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1.0.0
