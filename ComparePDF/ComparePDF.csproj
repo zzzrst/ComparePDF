@@ -119,7 +119,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="TextInteractor" Version="1.2.7367.35367" />
+    <PackageReference Include="TextInteractor" Version="1.2.7369.34863" />
   </ItemGroup>
 
   <ItemGroup>
