@@ -3,7 +3,7 @@ name: build and test on pull
 on:
   pull_request:
     branches:
-      - master
+      - master  
 
 jobs:
   build:
@@ -40,7 +40,7 @@ jobs:
     steps:
       - name: automerge
         uses: "pascalgn/automerge-action@ccae530ae13b6af67a7a2009c266fe925844e658"
-        if: github.actor == ${{'dependabot-preview'}}
+        if: github.actor == 'dependabot-preview'
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: "dependencies"
@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1.0.0
-        if: github.actor == ${{'dependabot-preview'}}
+        if: github.actor == 'dependabot-preview'
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           event-type: push-event
