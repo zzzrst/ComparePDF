@@ -58,5 +58,13 @@ namespace ComparePDFTester
             }
             Assert.Fail("File not found exception should be thrown");
         }
+
+        [Test]
+        public void TestNoLogger()
+        {
+            PDFComparer pDFComparer = new PDFComparer("Test page 1.pdf", "Test page 2.pdf");
+            Assert.IsTrue(pDFComparer.ComparePDFText(textResultPath), "Text In files are the same");
+            Assert.IsTrue(pDFComparer.ComparePDFImages(imageResultPath), "Images in file are the same");
+        }
     }
 }
