@@ -71,6 +71,7 @@ namespace ComparePDF
                 {
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     FileName = pdfToolPath,
                     Arguments = arguments,
                 };

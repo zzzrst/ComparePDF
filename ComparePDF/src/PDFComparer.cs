@@ -153,6 +153,11 @@ namespace ComparePDF
             string tempFolder = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             string pdfFile1Folder = Path.Combine(tempFolder, Path.GetFileNameWithoutExtension(this.PDFFilePath1));
             string pdfFile2Folder = Path.Combine(tempFolder, Path.GetFileNameWithoutExtension(this.PDFFilePath2));
+
+            this.DeleteDirectory(pdfFile1Folder);
+            this.DeleteDirectory(pdfFile2Folder);
+            this.DeleteFile(resultZipFile);
+
             Directory.CreateDirectory(pdfFile1Folder);
             Directory.CreateDirectory(pdfFile2Folder);
 
@@ -162,6 +167,23 @@ namespace ComparePDF
             ZipFile.CreateFromDirectory(tempFolder, resultZipFile);
 
             return this.CompareDirectory(pdfFile1Folder, pdfFile2Folder);
+        }
+
+        private void DeleteDirectory(string directory)
+        {
+            if (Directory.Exists(directory))
+            {
+                Directory.Delete(directory, true);
+
+            }
+        }
+
+        private void DeleteFile(string file)
+        {
+            if (File.Exists(file))
+            {
+                File.Delete(file);
+            }
         }
 
         private bool CompareDirectory(string directory1, string directory2)
