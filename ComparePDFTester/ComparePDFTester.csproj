@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TextInteractor" Version="1.0.0" />
+    <PackageReference Include="TextInteractor" Version="1.2.7368.35813" />
   </ItemGroup>
 
   <ItemGroup>
