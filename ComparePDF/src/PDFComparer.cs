@@ -37,6 +37,16 @@ namespace ComparePDF
         /// <param name="logger">The logger to use throughout the class.</param>
         public PDFComparer(string pdfFilePath1, string pdfFilePath2, ILogger logger)
         {
+            if (!File.Exists(pdfFilePath1))
+            {
+                throw new FileNotFoundException($"File {pdfFilePath1} cannot be found.");
+            }
+
+            if (!File.Exists(pdfFilePath2))
+            {
+                throw new FileNotFoundException($"File {pdfFilePath2} cannot be found.");
+            }
+
             this.PDFFilePath1 = pdfFilePath1;
             this.PDFFilePath2 = pdfFilePath2;
             this.Logger = logger;
@@ -102,8 +112,8 @@ namespace ComparePDF
         public bool ComparePDFText(string resultFilePath, (string regex, string replacement) regexReplacement = default, bool caseInsensitive = false, bool ignoreWhitespace = true)
         {
             // Convert both pdfs into text
-            string pdf1FileName = Path.GetTempFileName();
-            string pdf2FileName = Path.GetTempFileName();
+            string pdf1FileName = Path.ChangeExtension(Path.GetTempFileName(), ".txt");
+            string pdf2FileName = Path.ChangeExtension(Path.GetTempFileName(), ".txt");
 
             PDFToolWrapper.RunPDFToText(this.PDFFilePath1, pdf1FileName, this.Logger);
             PDFToolWrapper.RunPDFToText(this.PDFFilePath2, pdf2FileName, this.Logger);

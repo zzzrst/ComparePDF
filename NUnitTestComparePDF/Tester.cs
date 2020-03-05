@@ -42,5 +42,21 @@ namespace ComparePDFTester
             Assert.IsFalse(pDFComparer.ComparePDFText(textResultPath), "Text In files are not the same");
             Assert.IsTrue(pDFComparer.ComparePDFImages(imageResultPath), "Images in file are the same");
         }
+
+        [Test]
+        public void TestFileNotFound() 
+        {
+            try
+            {
+                PDFComparer pDFComparer = new PDFComparer("Test page 1.pdf", "Test non existing.pdf", new ConcreteLogger());
+                pDFComparer.ComparePDFText(textResultPath);
+                pDFComparer.ComparePDFImages(imageResultPath);
+            }
+            catch (FileNotFoundException)
+            {
+                Assert.Pass();
+            }
+            Assert.Fail("File not found exception should be thrown");
+        }
     }
 }
