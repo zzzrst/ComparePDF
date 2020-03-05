@@ -3,7 +3,7 @@ name: build and test on pull
 on:
   pull_request:
     branches:
-      - master  
+      - master
 
 jobs:
   build:
@@ -44,15 +44,10 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: "dependencies"
-          
-  trigger_workflow:
-    needs: [automerge]
-    
-    runs-on: ubuntu-latest
-    steps:
+ 
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1.0.0
-        if: github.actor == 'dependabot-preview'
+        if: github.actor == 'dependabot-preview' && success()
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           event-type: push-event
