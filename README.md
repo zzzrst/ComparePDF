@@ -27,3 +27,5 @@ It will return true if the pdfs are the same, false otherwise.
 
 ## Dependancies
  - [TextInteractor](https://github.com/zzzrst/TextInteractor)
+ ## Other Notes
+ Version number are labed as MAJOR.MINOR.dailyBuild.buildTime
