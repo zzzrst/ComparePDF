@@ -1,7 +1,7 @@
 # ComparePDF
 This is a .Net 2.0 Standard Library. 
-This directory contains the source code for the package ComparePDF. This program compares two different PDFs and see if they are identical. Uses software that runs on Windows 32 bit.
-
+This directory contains the source code for the package ComparePDF. This program compares two different PDFs and see if they are identical. Uses software that runs on Windows 32 bit. Please refer to the [Documentation]
+(https://zzzrst.github.io/ComparePDF/) for more details on the implementation.
 ## How to use
 ```c#
 public class Compare()
