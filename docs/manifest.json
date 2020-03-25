@@ -1,51 +1,15 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/DUONGCH/Projects/ComparePDFNew/ComparePDF",
+  "source_base_path": "C:/Users/DuongCh/Projects/ComparePDF/ComparePDF",
   "xrefmap": "xrefmap.yml",
   "files": [
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ComparePDF.PDFComparer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ComparePDF.PDFComparer.html",
-          "hash": "ZGMkOr27gXadzy/mTZp4Hw=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ComparePDF.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ComparePDF.html",
-          "hash": "63QD8dzgxYFnfnM0HZ4HTg=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
     {
       "type": "Conceptual",
       "source_relative_path": "api/index.md",
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "FZp+hng/gfzGvNdZJGkMyw=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "api/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/toc.html",
-          "hash": "uXwSmsWX1Jqa9ullrKLlHw=="
+          "hash": "G6ZFRi1p54UDmdE9Yyj6Ow=="
         }
       },
       "is_incremental": false,
@@ -57,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "D9Xw2TVo5zeHejiCWbKVKg=="
+          "hash": "WbSJ659oc3OWDwr2zFOgPw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -81,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "CGA0tfeEHpAkOronIr2l7g=="
+          "hash": "GR1ywdVOJHWTpOwlV4OrYQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -93,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "+rHUkRZHZRi5gd1aTU6lJA=="
+          "hash": "IGK1ZSYI4NbShXZSeUUd6Q=="
         }
       },
       "is_incremental": false,
@@ -103,23 +67,19 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Disable incremental build by force rebuild option.",
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0
+        "skipped_file_count": 0,
+        "full_build_reason_code": "ForceRebuild"
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 3,
-          "skipped_file_count": 3
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 2,
-          "skipped_file_count": 2
+          "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
@@ -132,8 +92,8 @@
     },
     {
       "status": {
-        "can_incremental": true,
-        "details": "Can support incremental post processing.",
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
         "incrementalPhase": "postProcessing",
         "total_file_count": 0,
         "skipped_file_count": 0
