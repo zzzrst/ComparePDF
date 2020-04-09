@@ -117,35 +117,6 @@ namespace ComparePDF
         }
 
         /// <summary>
-        /// We extract the text from the PDFs provided. We compare the text based on the arguements provided. We ignore whitespaces by default.
-        /// </summary>
-        /// <param name="resultFilePath">Name of the file for PDF text comparison.</param>
-        /// <param name="regexReplacement">(REGEX, REPLACEMENT) -> A 2-Tuple string for the regex and replacement.</param>
-        /// <param name="caseInsensitive">Toggle when comparing extracted text. Default to be false.</param>
-        /// <param name="ignoreWhitespace">Toggle when comparing extracted text. Default to be true.</param>
-        /// <returns><code>true</code> if the PDF texts are the same. </returns>
-        //public bool ComparePDFText(string resultFilePath, (string regex, string replacement) regexReplacement = default, bool caseInsensitive = false, bool ignoreWhitespace = true)
-        //{
-        //    // Convert both pdfs into text
-        //    string pdf1FileName = Path.ChangeExtension(Path.GetTempFileName(), ".txt");
-        //    string pdf2FileName = Path.ChangeExtension(Path.GetTempFileName(), ".txt");
-
-        //    PDFToolWrapper.RunPDFToText(this.PDFFilePath1, pdf1FileName, this.Logger);
-        //    PDFToolWrapper.RunPDFToText(this.PDFFilePath2, pdf2FileName, this.Logger);
-
-        //    TextFile pdfText1 = new TextInteractor(pdf1FileName, this.Logger);
-        //    TextFile pdfText2 = new TextInteractor(pdf2FileName, this.Logger);
-
-        //    if (regexReplacement != default)
-        //    {
-        //        pdfText1.ReplaceOccurances(toReplace: regexReplacement.regex, replaceWith: regexReplacement.replacement);
-        //        pdfText2.ReplaceOccurances(toReplace: regexReplacement.regex, replaceWith: regexReplacement.replacement);
-        //    }
-
-        //    return pdfText1.Compare(pdfText2, resultFilePath, ignoreWhitespace, caseInsensitive);
-        //}
-
-        /// <summary>
         /// Compares the embedded files inside the PDF through extraction and hashing.
         /// </summary>
         /// <param name="resultZipFile">Zip file that contains the extracted files.</param>
@@ -199,7 +170,6 @@ namespace ComparePDF
             if (Directory.Exists(directory))
             {
                 Directory.Delete(directory, true);
-
             }
         }
 
