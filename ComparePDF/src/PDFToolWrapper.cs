@@ -15,7 +15,7 @@ namespace ComparePDF
     /// <summary>
     /// Class to represent the wrappers for all the PDFTools.
     /// </summary>
-    internal static class PDFToolWrapper
+    public static class PDFToolWrapper
     {
         /// <summary>
         /// Runs PDF to text with the provided arguments of -nopgbrk and -table.

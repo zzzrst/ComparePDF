@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/DuongCh/Projects/ComparePDF/ComparePDF",
+  "source_base_path": "C:/GitHub/ComparePDF/ComparePDF",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "G6ZFRi1p54UDmdE9Yyj6Ow=="
+          "hash": "AUtsAcSKIoNBE9PaukEnkw=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "WbSJ659oc3OWDwr2zFOgPw=="
+          "hash": "xNCWl3+3JJKW5Z95HfJO8Q=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "GR1ywdVOJHWTpOwlV4OrYQ=="
+          "hash": "+6qz3FTvH5h2YuBZIhOqPA=="
         }
       },
       "is_incremental": false,
