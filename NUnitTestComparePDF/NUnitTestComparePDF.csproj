@@ -13,7 +13,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-    <PackageReference Include="TextInteractor" Version="1.2.7389.34135" />
+    <PackageReference Include="TextInteractor" Version="1.2.7642.11032" />
   </ItemGroup>
 
   <ItemGroup>
