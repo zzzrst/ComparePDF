@@ -1,0 +1,26 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: docfx.console
+    versions:
+    - 2.56.6
+    - 2.56.7
+    - 2.57.0
+    - 2.57.1
+  - dependency-name: Microsoft.NET.Test.Sdk
+    versions:
+    - 16.8.3
+    - 16.9.1
+  - dependency-name: TextInteractor
+    versions:
+    - 1.2.7649.11029
+    - 1.2.7702.11721
+  - dependency-name: nunit
+    versions:
+    - 3.13.0
+    - 3.13.1
